@@ -25,7 +25,7 @@ namespace EssentialTools.Controllers
             IKernel ninjectKernal = new StandardKernel();
             ninjectKernal.Bind<IValueCalculator>().To<LinqValueCalculator>();
 
-            IValueCalculator calc = ninjectKernal.Get<LinqValueCalculator>();
+            IValueCalculator calc = ninjectKernal.Get<IValueCalculator>();
 
             ShoppingCart cart = new ShoppingCart(calc) { Products = products };
 
