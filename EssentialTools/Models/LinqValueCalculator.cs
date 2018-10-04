@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace EssentialTools
+namespace EssentialTools.Models
 {
-    public class LinqValueCalculator
+    public class LinqValueCalculator : IValueCalculator
     {
 
         public decimal ValueProducts(IEnumerable<Product> products)
