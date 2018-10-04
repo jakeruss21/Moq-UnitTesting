@@ -10,6 +10,7 @@ namespace EssentialTools.Controllers
 {
     public class HomeController : Controller
     {
+        private IValueCalculator calc;
 
         private Product[] products =
         {
@@ -19,14 +20,14 @@ namespace EssentialTools.Controllers
             new Product {Name = "Corner flag", Category = "Soccer", Price = 34.95M}
         };
 
+        public HomeController(IValueCalculator calcParam)
+        {
+            calc = calcParam;
+        }
+
         // GET: Home
         public ActionResult Index()
         {
-            IKernel ninjectKernal = new StandardKernel();
-            ninjectKernal.Bind<IValueCalculator>().To<LinqValueCalculator>();
-
-            IValueCalculator calc = ninjectKernal.Get<IValueCalculator>();
-
             ShoppingCart cart = new ShoppingCart(calc) { Products = products };
 
             decimal totalValue = cart.CalculateProductTotal();

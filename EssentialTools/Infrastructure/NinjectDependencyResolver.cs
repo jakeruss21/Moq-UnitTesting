@@ -10,22 +10,27 @@ namespace EssentialTools.Infrastructure
 {
     public class NinjectDependencyResolver : IDependencyResolver
     {
-        private IKernel kernal;
+        private IKernel kernel;
 
-        public NinjectDependencyResolver(IKernel kernalParam)
+        public NinjectDependencyResolver(IKernel kernelParam)
         {
-            kernal = kernalParam;
+            kernel = kernelParam;
             AddBindings();
         }
 
         public object GetService(Type serviceType)
         {
-            return kernal.TryGet(serviceType);
+            return kernel.TryGet(serviceType);
+        }
+
+        public IEnumerable<object> GetServices(Type serviceType)
+        {
+            return kernel.GetAll(serviceType);
         }
 
         private void AddBindings()
         {
-            kernal.Bind<IValueCalculator>().To<LinqValueCalculator>();
+            kernel.Bind<IValueCalculator>().To<LinqValueCalculator>();
         }
     }
 
